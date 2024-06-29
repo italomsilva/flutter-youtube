@@ -44,6 +44,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child:  telas[indexButton],
       ),
       bottomNavigationBar: BottomNavigationBar(

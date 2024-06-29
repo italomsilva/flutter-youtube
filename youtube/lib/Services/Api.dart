@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:youtube/Gateway/env.dart' as env;
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:youtube/Model/VideoEntity.dart';
 
 class Api {
-  pesquisar(String pesquisaResult) async {
+  Future<List<VideoEntity>> pesquisar(String pesquisaResult) async {
     const urlSec = "${env.URL_SECUNDARIA}/search";
     var urlCompleta = Uri.https(env.URL_BASE, urlSec,{
       "part": "snippet",
@@ -18,8 +18,11 @@ class Api {
     });
     http.Response response = await http.get(urlCompleta);
     Map<String, dynamic> dadosJson = jsonDecode(response.body);
-    if(response.statusCode == 200)
-    print(dadosJson["items"][0]["snippet"]["title"]);
-    else print("Deuruim");
+    List<VideoEntity> videos = dadosJson["items"].map<VideoEntity>(
+        (video){
+          return VideoEntity.fromJson(video);
+        }
+    ).toList();
+    return videos;
   }
 }
