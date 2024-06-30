@@ -10,11 +10,10 @@ class Api {
     var urlCompleta = Uri.https(env.URL_BASE, urlSec,{
       "part": "snippet",
       "type": "video",
-      "maxResults": "20",
+      "maxResults": "50",
       "order": "date",
       "key": env.YOUTUBE_APIKEY,
-      "channelId": env.ID_CANAL,
-      "q": pesquisaResult
+      "q": "legobatman"
     });
     http.Response response = await http.get(urlCompleta);
     Map<String, dynamic> dadosJson = jsonDecode(response.body);

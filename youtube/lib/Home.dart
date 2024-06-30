@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/components/Search.dart';
 import 'package:youtube/views/HomeView.dart';
 import 'package:youtube/views/HotView.dart';
 import 'package:youtube/views/LibraryView%5B.dart';
@@ -32,18 +33,25 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Colors.white,
         actions: [
-          IconButton(onPressed: (){print("videocam");},
+          IconButton(
+            onPressed: (){print("videocam");},
             icon: Icon(Icons.videocam),
           ),
-          IconButton(onPressed: (){print("pesquisa");},
+          IconButton(
+            onPressed: () async{
+               String? catiau = await showSearch(context: context, delegate: CustomSearchDelegate());
+               print("result $catiau");
+            },
             icon: Icon(Icons.search),
           ),
-          IconButton(onPressed: (){print("conta");},
+          IconButton(
+            onPressed: (){print("conta");},
             icon: Icon(Icons.account_circle),
           ),
         ],
       ),
       body: Container(
+        color: Colors.white,
         padding: EdgeInsets.symmetric(horizontal: 10),
         child:  telas[indexButton],
       ),
